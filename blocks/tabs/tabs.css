@@ -1,0 +1,13 @@
+ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.tabs-container {
+    background-color: #fafafa;
+}
+
+.hidden {
+    display: none;
+}
