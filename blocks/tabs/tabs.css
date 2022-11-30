@@ -8,6 +8,10 @@ ul {
     background-color: #fafafa;
 }
 
-.hidden {
+.section[data-tab] {
     display: none;
+}
+
+.section[data-tab].active {
+    display: initial;
 }
