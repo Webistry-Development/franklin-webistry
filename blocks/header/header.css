@@ -1,9 +1,6 @@
 /* header and nav layout */
 header nav {
-  display: grid;
-  grid-template:
-    'hamburger brand tools' var(--nav-height)
-    'sections sections sections' 1fr / 50px 1fr 50px;
+  display: flex;
   align-items: center;
   padding: 0 2rem;
   position: fixed;
@@ -11,8 +8,12 @@ header nav {
   background-color: var(--background-color);
   width: 100vw;
   height: var(--nav-height);
-  box-sizing: border-box;
   font-family: var(--body-font-family);
+}
+
+header ul {
+  display: flex;
+  justify-content: space-around;
 }
 
 header nav a:any-link {
