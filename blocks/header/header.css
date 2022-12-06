@@ -1,12 +1,12 @@
-/* header and nav layout */
+header and nav layout
 header nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 2rem;
   position: fixed;
   z-index: 1;
   background-color: var(--background-color);
-  width: 100vw;
   height: var(--nav-height);
   font-family: var(--body-font-family);
 }
@@ -258,4 +258,23 @@ header nav[aria-expanded='true'] .nav-tools li {
     padding: 16px;
     box-shadow: 0 0 5px var(text-color);
   }
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+header li {
+  list-style-type: none;
+  display: flex;
+}
+
+header ul {
+  display: flex;
+  gap: 48px;
+}
+
+header span {
+  font-size: small;
 }
