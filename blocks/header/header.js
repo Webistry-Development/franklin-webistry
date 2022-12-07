@@ -2,25 +2,26 @@ import { readBlockConfig, replaceElement } from '../../scripts/lib-franklin.js';
 
 export default async function decorate($block) {
   const $cfg = readBlockConfig($block);
-  $block.textContent = '';
 
   // fetch nav content
   const $navPath = $cfg.nav || '/nav';
   const $resp = await fetch(`${$navPath}.plain.html`);
+
   if ($resp.ok) {
-    const $html = await $resp.text();
     const $container = document.createElement('div');
+    $container.innerHTML = await $resp.text();
     $container.classList.add('container');
-    $container.innerHTML = $html;
 
     // Replace the div surrounding the Webistry logo with an a tag
-    const $homeATag = document.createElement('a');
-    const $webistryLogo = $container.querySelector('picture > img');
+    const $logoLink = document.createElement('a');
+    const $logo = $container.querySelector('picture');
 
-    $homeATag.classList.add('header__logo');
-    $homeATag.href = 'https://www.webistry.com';
-    $homeATag.append($webistryLogo);
-    $container.querySelector('div').replaceWith($homeATag);
+    console.log($container.cloneNode(true));
+
+    $logoLink.classList.add('header-logo');
+    $logoLink.href = 'https://www.webistry.com';
+    $logoLink.append($logo);
+    $container.querySelector('div').replaceWith($logoLink);
 
     // Switch the 'div' containing li elements to a 'nav'
     const $oldLiDiv = $container.querySelector('.container > div');
@@ -42,8 +43,8 @@ export default async function decorate($block) {
 
     // Turn last li into a button
     const $lastLi = $container.querySelector('li:last-of-type');
-    const $newCTA = replaceElement($lastLi, 'button', 'button--red');
-    $newCTA.classList.add('button', 'button--small');
+    const $newCTA = replaceElement($lastLi, 'button', 'button-red');
+    $newCTA.classList.add('button', 'button-small');
 
     $block.textContent = '';
     $block.append($container);

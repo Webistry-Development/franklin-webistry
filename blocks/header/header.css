@@ -1,14 +1,14 @@
-.header-wrapper {
+header .header-wrapper {
   box-shadow: 0 8px 4px -4px rgb(0 0 0 / 10%);
   height: 80px;
 }
 
-.header.block {
+header .header.block {
   display: flex;
   justify-content: center;
 }
 
-header .container {
+header .header .container {
   display: flex;
   justify-content: space-between;
   padding:  0 2rem;
@@ -19,44 +19,40 @@ header .container {
   max-height: max-content;
 }
 
-header #site-primary-navigation {
+header .header #site-primary-navigation {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
 }
 
-header ul {
+header .header ul {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
-header li {
+header .header li {
   list-style-type: none;
   display: flex;
 }
 
-header nav a:any-link {
+header .header nav a:any-link {
   color: currentcolor;
 }
 
-header ul {
-  display: flex;
-  gap: 20px;
-}
-
-header span {
+header .header span {
   font-size: small;
   font-family: proxima-nova,sans-serif;
   letter-spacing: 1px;
 }
 
-header img {
+header .header img {
   width: 230px;
   height: auto;
 }
 
-header .button--red {
+header .header .button-red {
   background-color: #DE514E;
   margin: 0 0 0 20px;
   padding: 9px 10px 8px;
