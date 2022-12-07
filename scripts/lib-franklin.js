@@ -546,6 +546,14 @@ export function loadFooter(footer) {
   return loadBlock(footerBlock);
 }
 
+export function replaceElement(oldElement, newElementType, className = null) {
+  const $newElement = document.createElement(newElementType);
+  $newElement.textContent = oldElement.textContent;
+  if (className) { $newElement.classList.add(className.toString()); }
+  oldElement.replaceWith($newElement);
+  return $newElement;
+}
+
 /**
  * init block utils
  */

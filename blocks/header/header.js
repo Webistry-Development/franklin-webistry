@@ -1,4 +1,4 @@
-import { readBlockConfig, decorateIcons } from '../../scripts/lib-franklin.js';
+import { readBlockConfig, replaceElement } from '../../scripts/lib-franklin.js';
 
 export default async function decorate($block) {
   const $cfg = readBlockConfig($block);
@@ -39,6 +39,11 @@ export default async function decorate($block) {
       a.append($newSpan);
       a.classList.add('nav');
     });
+
+    // Turn last li into a button
+    const $lastLi = $container.querySelector('li:last-of-type');
+    const $newCTA = replaceElement($lastLi, 'button', 'button--red');
+    $newCTA.classList.add('button', 'button--small');
 
     $block.textContent = '';
     $block.append($container);
