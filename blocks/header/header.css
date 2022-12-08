@@ -100,7 +100,7 @@ header > .header > .container .header-vertical-list {
     display: initial;
   }
   header .header ul {
-    display: none;
+    left: -100%;
   }
   header .header .container {
     justify-content: space-between;
