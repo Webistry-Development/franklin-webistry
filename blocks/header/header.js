@@ -1,4 +1,5 @@
-import { readBlockConfig, replaceElement } from '../../scripts/lib-franklin.js';
+import { readBlockConfig, replaceElement} from '../../scripts/lib-franklin.js';
+import { createTag } from '../../scripts/scripts.js';
 
 // When you click on the hamburger give a new class to the ul that has column layout
 
@@ -13,7 +14,6 @@ export default async function decorate($block) {
     const $container = document.createElement('div');
     $container.innerHTML = await $resp.text();
     $container.classList.add('container');
-    console.log($container.cloneNode(true));
 
     // Replace the div surrounding the Webistry logo with an a tag
     const $logoLink = document.createElement('a');
@@ -49,13 +49,12 @@ export default async function decorate($block) {
 
     // hamburger for mobile
 
-    const $hamburger = document.createElement('div');
-    $hamburger.classList.add('nav-hamburger');
-    $hamburger.innerHTML = '<button class="nav-hamburger-icon"><figure class="header-hamburger">-_-</figure></button>';
-
-    const $verticalList = $container.querySelector('ul').cloneNode(true);
-    $verticalList.classList.add('header-vertical-list');
-    $container.append($verticalList);
+    const $hamburger = createTag('div', { class: 'nav-hamburger' });
+    Array.from(Array(3)).forEach(() => {
+      $hamburger.append(createTag('span', { class: 'bar' }));
+    });
+    $container.append($hamburger);
+    console.log($container.cloneNode(true));
 
     $hamburger.addEventListener('click', () => {
       const $list = $container.querySelector('ul');
