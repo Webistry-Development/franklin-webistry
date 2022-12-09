@@ -105,6 +105,16 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 }
 
+export function createTag(name, attrs) {
+  const el = document.createElement(name);
+  if (typeof attrs === 'object') {
+    for (const [key, value] of Object.entries(attrs)) {
+      el.setAttribute(key, value);
+    }
+  }
+  return el;
+}
+
 /**
  * loads everything that happens a lot later, without impacting
  * the user experience.

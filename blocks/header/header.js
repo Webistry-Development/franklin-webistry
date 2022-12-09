@@ -1,4 +1,5 @@
 import { readBlockConfig, replaceElement } from '../../scripts/lib-franklin.js';
+import { createTag } from '../../scripts/scripts.js';
 
 // When you click on the hamburger give a new class to the ul that has column layout
 
@@ -13,7 +14,6 @@ export default async function decorate($block) {
     const $container = document.createElement('div');
     $container.innerHTML = await $resp.text();
     $container.classList.add('container');
-    console.log($container.cloneNode(true));
 
     // Replace the div surrounding the Webistry logo with an a tag
     const $logoLink = document.createElement('a');
@@ -21,16 +21,15 @@ export default async function decorate($block) {
 
     $logoLink.classList.add('header-logo');
     $logoLink.href = '/';
+    $logo.parentElement.replaceWith($logoLink);
     $logoLink.append($logo);
-    $container.querySelector('div').replaceWith($logoLink);
 
     // Switch the 'div' containing li elements to a 'nav'
-    const $oldLiDiv = $container.querySelector('.container > div');
+    const $list = $container.querySelector('ul');
     const $nav = document.createElement('nav');
 
-    $nav.id = 'site-primary-navigation';
-    $nav.append(...$oldLiDiv.childNodes);
-    $oldLiDiv.replaceWith($nav);
+    $list.parentElement.replaceWith($nav);
+    $nav.append($list);
 
     // Wrap inner text of a tags with a span
     const $aTags = $container.querySelectorAll('nav > ul > li > a');
@@ -42,18 +41,21 @@ export default async function decorate($block) {
       a.classList.add('nav');
     });
 
-    // Turn last li into a button
-    const $lastLi = $container.querySelector('strong');
-    const $newCTA = replaceElement($lastLi, 'button', 'button-red');
-    $newCTA.classList.add('button', 'button-small');
+    // Turn bolded links into a CTA.
+    const $buttons = $list.querySelectorAll('strong');
+
+    $buttons.forEach(($button) => {
+      const $newButton = createTag('button', { className: 'button-red' });
+      $newButton.textContent = $button.textContent;
+      $button.replaceWith($newButton);
+    });
 
     // hamburger for mobile
-
     const $hamburger = document.createElement('div');
     $hamburger.classList.add('nav-hamburger');
     $hamburger.innerHTML = '<button class="nav-hamburger-icon"><figure class="header-hamburger">-_-</figure></button>';
 
-    const $verticalList = $container.querySelector('ul').cloneNode(true);
+    const $verticalList = $list.cloneNode(true);
     $verticalList.classList.add('header-vertical-list');
     $container.append($verticalList);
 
@@ -61,8 +63,8 @@ export default async function decorate($block) {
       const $list = $container.querySelector('ul');
       $list.classList.add('showVerticalMenu');
     });
+
     $container.insertBefore($hamburger, $nav);
-   
 
     // $nav.setAttribute('aria-expanded', 'false');
 
