@@ -16,17 +16,10 @@ header .header .container {
   align-items: center;
   margin: 0 5% 0 5%;
   max-width: 1100px;
-  max-height: max-content;
+  height: max-content;
 }
 
-header .header #site-primary-navigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-}
-
-header .header ul {
+header .header .nav-list {
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -62,7 +55,7 @@ header .header img {
   height: auto;
 }
 
-header .header .button-red {
+header .button-red {
   background-color: #f05f5d;
   margin: 0 0 0 20px;
   padding: 9px 10px 8px;
@@ -85,29 +78,56 @@ header .header-logo {
   }
 }
 
-header .nav-hamburger-icon {
-  background-color: white;
-  color: black;
+header .nav-hamburger {
   display: none;
+}
+
+header .bar {
+  display: block;
+  background-color: #404041;
+  height: 2px;
+  width: 20px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: #101010;
 }
 
 header > .header > .container .header-vertical-list {
   display: none;
 }
 
-@media only screen and (max-width: 705px) {
+@media only screen and (max-width: 768px) {
   header .nav-hamburger-icon {
     display: initial;
   }
-  header .header ul {
-    left: -100%;
-  }
-  header .header .container {
-    justify-content: space-between;
-  }
-  header .showVerticalMenu {
-    display: initial;
+  
+  header .nav-list {
+    left: -200%;
+    position: fixed;
     flex-direction: column;
+    background-color: white;
+    width: 100%;
+    /* box-shadow: 0 8px 4px -4px rgb(0 0 0 / 10%); */
+  }
+
+  header .header.mobile-active .nav-list{
+    left: 0;
+    position: fixed;
+  }
+
+  header .header .container {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 40vh;
+  }
+
+  header .header-logo {
+    padding-top: 0;
+  }
+
+  header .nav-hamburger {
+    display: block;
   }
 }
 

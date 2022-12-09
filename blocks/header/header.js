@@ -1,4 +1,4 @@
-import { readBlockConfig, replaceElement} from '../../scripts/lib-franklin.js';
+import { readBlockConfig } from '../../scripts/lib-franklin.js';
 import { createTag } from '../../scripts/scripts.js';
 
 // When you click on the hamburger give a new class to the ul that has column layout
@@ -11,46 +11,43 @@ export default async function decorate($block) {
   const $resp = await fetch(`${$navPath}.plain.html`);
 
   if ($resp.ok) {
-    const $container = document.createElement('div');
+    const $container = createTag('div', { class: 'container' });
     $container.innerHTML = await $resp.text();
-    $container.classList.add('container');
-    $container.querySelector('ul');
+    const $header = document.querySelector('.header-wrapper > .header.block');
 
     // Replace the div surrounding the Webistry logo with an a tag
-    const $logoLink = document.createElement('a');
+    const $logoLink = createTag('a', { class: 'header-logo', href: '/' });
     const $logo = $container.querySelector('picture');
-
-    $logoLink.classList.add('header-logo');
-    $logoLink.href = '/';
+    $logo.parentElement.replaceWith($logoLink);
     $logoLink.append($logo);
-    $container.querySelector('div').replaceWith($logoLink);
 
     // Switch the 'div' containing li elements to a 'nav'
-    const $oldLiDiv = $container.querySelector('.container > div');
-    const $nav = document.createElement('nav');
-
-    $nav.id = 'site-primary-navigation';
-    $nav.append(...$oldLiDiv.childNodes);
-    $oldLiDiv.replaceWith($nav);
+    const $list = $container.querySelector('ul');
+    $list.classList.add('nav-list')
+    const $nav = createTag('nav');
+    $list.parentElement.replaceWith($nav);
+    $nav.append($list);
 
     // Wrap inner text of a tags with a span
     const $aTags = $container.querySelectorAll('nav > ul > li > a');
     $aTags.forEach((a) => {
-      const $newSpan = document.createElement('span');
+      const $newSpan = createTag('span', { class: 'nav' });
       $newSpan.textContent = a.textContent;
       a.textContent = '';
       a.append($newSpan);
-      a.classList.add('nav');
     });
 
-    // Turn last li into a button
-    const $lastLi = $container.querySelector('strong');
-    const $newCTA = replaceElement($lastLi, 'button', 'button-red');
-    $newCTA.classList.add('button', 'button-small');
+    // Turn bolded links into a CTA.
+    const $buttons = $list.querySelectorAll('strong');
+
+    $buttons.forEach(($button) => {
+      const $newButton = createTag('button', { class: 'button-red' });
+      $newButton.textContent = $button.textContent;
+      $button.replaceWith($newButton);
+    });
 
     // hamburger for mobile
-
-    const $hamburger = createTag('div', { class: 'nav-hamburger' });
+    const $hamburger = createTag('div', { class: 'nav-hamburger', aria_expanded: 'false' });
     Array.from(Array(3)).forEach(() => {
       $hamburger.append(createTag('span', { class: 'bar' }));
     });
@@ -58,10 +55,15 @@ export default async function decorate($block) {
     console.log($container.cloneNode(true));
 
     $hamburger.addEventListener('click', () => {
-      const $list = $container.querySelector('ul');
-      $list.classList.add('showVerticalMenu');
+      console.log($hamburger.getAttribute('aria_expanded'))
+      if ($hamburger.getAttribute('aria_expanded') === 'false') {
+        $hamburger.setAttribute('aria_expanded', 'true');
+        $header.classList.add('mobile-active')
+      } else {
+        $hamburger.setAttribute('aria_expanded', 'false');
+        $header.classList.remove('mobile-active')
+      }
     });
-    $container.insertBefore($hamburger, $nav);
 
     $block.textContent = '';
     $block.append($container);
