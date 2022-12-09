@@ -14,6 +14,7 @@ export default async function decorate($block) {
     const $container = document.createElement('div');
     $container.innerHTML = await $resp.text();
     $container.classList.add('container');
+    $container.querySelector('ul');
 
     // Replace the div surrounding the Webistry logo with an a tag
     const $logoLink = document.createElement('a');
@@ -61,9 +62,6 @@ export default async function decorate($block) {
       $list.classList.add('showVerticalMenu');
     });
     $container.insertBefore($hamburger, $nav);
-   
-
-    // $nav.setAttribute('aria-expanded', 'false');
 
     $block.textContent = '';
     $block.append($container);
