@@ -71,12 +71,14 @@ header .header img {
 }
 
 header .button-red {
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 9px 10px 8px;
+  font-weight: 500;
+  box-sizing: border-box;
   background-color: #f05f5d;
   margin: 0 0 0 20px;
-  padding: 9px 10px 8px;
   border-radius: 7px;
-  font-size: 12px;
-  font-weight: 500;
   line-height: 1.15;
   font-family: proxima-nova, sans-serif;
   border: 2px solid transparent;
