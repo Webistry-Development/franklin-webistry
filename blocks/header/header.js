@@ -31,7 +31,7 @@ export default async function decorate($block) {
     // Wrap inner text of a tags with a span
     const $aTags = $container.querySelectorAll('nav > ul > li > a');
     $aTags.forEach((a) => {
-      const $newSpan = createTag('span', { class: 'nav' });
+      const $newSpan = createTag('span', { class: 'nav-item' });
       $newSpan.textContent = a.textContent;
       a.textContent = '';
       a.append($newSpan);
@@ -52,17 +52,22 @@ export default async function decorate($block) {
       $hamburger.append(createTag('span', { class: 'bar' }));
     });
     $container.append($hamburger);
-    console.log($container.cloneNode(true));
 
     $hamburger.addEventListener('click', () => {
-      console.log($hamburger.getAttribute('aria_expanded'))
       if ($hamburger.getAttribute('aria_expanded') === 'false') {
         $hamburger.setAttribute('aria_expanded', 'true');
-        $header.classList.add('mobile-active')
+        $header.classList.add('mobile-active');
       } else {
+        $header.classList.remove('mobile-active');
         $hamburger.setAttribute('aria_expanded', 'false');
-        $header.classList.remove('mobile-active')
       }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!$container.contains(event.target) && $hamburger.getAttribute('aria_expanded') === 'true') {
+        $hamburger.setAttribute('aria_expanded', 'false');
+        $header.classList.remove('mobile-active');
+      };
     });
 
     $block.textContent = '';
