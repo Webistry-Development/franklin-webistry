@@ -3,6 +3,34 @@ import { createTag } from '../../scripts/scripts.js';
 
 // When you click on the hamburger give a new class to the ul that has column layout
 
+function buildMobileMenu($container, $header) {
+  // hamburger for mobile
+  const $hamburger = createTag('div', { class: 'nav-hamburger', aria_expanded: 'false' });
+
+  for (let bar = 0; bar < 3; bar += 1) {
+    $hamburger.append(createTag('span', { class: 'bar' }));
+  }
+
+  $container.append($hamburger);
+
+  $hamburger.addEventListener('click', () => {
+    if ($hamburger.getAttribute('aria_expanded') === 'false') {
+      $hamburger.setAttribute('aria_expanded', 'true');
+      $header.classList.add('mobile-active');
+    } else {
+      $header.classList.remove('mobile-active');
+      $hamburger.setAttribute('aria_expanded', 'false');
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!$container.contains(event.target) && $hamburger.getAttribute('aria_expanded') === 'true') {
+      $hamburger.setAttribute('aria_expanded', 'false');
+      $header.classList.remove('mobile-active');
+    }
+  });
+}
+
 export default async function decorate($block) {
   const $cfg = readBlockConfig($block);
 
@@ -23,7 +51,7 @@ export default async function decorate($block) {
 
     // Switch the 'div' containing li elements to a 'nav'
     const $list = $container.querySelector('ul');
-    $list.classList.add('nav-list')
+    $list.classList.add('nav-list');
     const $nav = createTag('nav');
     $list.parentElement.replaceWith($nav);
     $nav.append($list);
@@ -46,29 +74,7 @@ export default async function decorate($block) {
       $button.replaceWith($newButton);
     });
 
-    // hamburger for mobile
-    const $hamburger = createTag('div', { class: 'nav-hamburger', aria_expanded: 'false' });
-    Array.from(Array(3)).forEach(() => {
-      $hamburger.append(createTag('span', { class: 'bar' }));
-    });
-    $container.append($hamburger);
-
-    $hamburger.addEventListener('click', () => {
-      if ($hamburger.getAttribute('aria_expanded') === 'false') {
-        $hamburger.setAttribute('aria_expanded', 'true');
-        $header.classList.add('mobile-active');
-      } else {
-        $header.classList.remove('mobile-active');
-        $hamburger.setAttribute('aria_expanded', 'false');
-      }
-    });
-
-    document.addEventListener('click', (event) => {
-      if (!$container.contains(event.target) && $hamburger.getAttribute('aria_expanded') === 'true') {
-        $hamburger.setAttribute('aria_expanded', 'false');
-        $header.classList.remove('mobile-active');
-      };
-    });
+    buildMobileMenu($container, $header);
 
     $block.textContent = '';
     $block.append($container);
