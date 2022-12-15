@@ -25,7 +25,7 @@
   /* body sizes */
   --body-font-size-m: 22px;
   --body-font-size-s: 18px;
-  --body-font-size-xs: 14px;
+  --body-font-size-xs: 12px;
 
   /* heading sizes */
   --heading-font-size-xxl: 48px;
@@ -40,8 +40,12 @@
 
 }
 
+header {
+  font-size: 12px;
+}
+
 body {
-  font-size: var(--body-font-size-m);
+  font-size: var(--body-font-size-s);
   margin: 0;
   font-family: var(--fixed-font-family);
   line-height: 1.6;

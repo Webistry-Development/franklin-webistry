@@ -44,6 +44,7 @@ header .header nav a:hover .nav-item:after{
 header .header .nav-list {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 36px;
   transition: height 0.3s ease;
 }
@@ -60,7 +61,6 @@ header .header nav a:any-link {
 
 header .header span {
   font-size: 12px;
-  font-family: proxima-nova, sans-serif;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -80,7 +80,6 @@ header .button-red {
   margin: 0 0 0 0px;
   border-radius: 7px;
   line-height: 1.15;
-  font-family: proxima-nova, sans-serif;
   border: 2px solid transparent;
   text-transform: uppercase;
   transition: background-color .2s ease-in,color .2s ease-in,border .2s ease-in
