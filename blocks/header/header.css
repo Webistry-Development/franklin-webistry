@@ -13,7 +13,7 @@ header .header .container {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding:  0 2rem;
+  padding:  3px 2rem;
   margin: 0 auto;
   width: 1052px;
   max-height: max-content;
@@ -96,14 +96,17 @@ header .button-red:hover {
     width: 700px;
     justify-content: center;
     margin: 0 1em 0 1em;
+    height: 117px;
+    box-sizing: border-box;
+    padding: 10px 0;
   }
 
   header .header #site-primary-navigation {
     padding: 0;
   }
 
-  header .header-logo {
-  padding-top: 16px;
+  header .nav-list {
+    margin: 0;
   }
 }
 

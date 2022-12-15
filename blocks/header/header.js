@@ -1,10 +1,7 @@
 import { readBlockConfig } from '../../scripts/lib-franklin.js';
 import { createTag } from '../../scripts/scripts.js';
 
-// When you click on the hamburger give a new class to the ul that has column layout
-
 function buildMobileMenu($container, $header) {
-  // hamburger for mobile
   const $hamburger = createTag('div', { class: 'nav-hamburger', aria_expanded: 'false' });
 
   for (let bar = 0; bar < 3; bar += 1) {

@@ -20,9 +20,7 @@
   --text-color: #000;
 
   /* fonts */
-  --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
-  --heading-font-family: var(--body-font-family);
-  --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
+  --fixed-font-family: 'proxima-nova', 'sans-serif';
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -45,7 +43,7 @@
 body {
   font-size: var(--body-font-size-m);
   margin: 0;
-  font-family: var(--body-font-family);
+  font-family: var(--fixed-font-family);
   line-height: 1.6;
   color: var(--text-color);
   background-color: var(--background-color);
