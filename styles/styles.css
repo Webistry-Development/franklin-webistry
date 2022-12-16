@@ -12,15 +12,12 @@
 
  :root {
   /* colors */
-  --link-color: #035fe6;
-  --link-hover-color: #136ff6;
   --background-color: #fff;
-  --overlay-background-color: #eee;
-  --highlight-background-color: #ccc;
   --text-color: #000;
+  --red: #F05F5D;
 
   /* fonts */
-  --fixed-font-family: 'proxima-nova', 'sans-serif';
+  --font-proxima-nova: 'proxima-nova', 'sans-serif';
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -40,6 +37,14 @@
 
 }
 
+* {
+  font-family: 'proxima-nova', 'sans-serif';
+}
+
+a {
+  color: inherit;
+}
+
 header {
   font-size: 12px;
 }
@@ -47,7 +52,7 @@ header {
 body {
   font-size: var(--body-font-size-s);
   margin: 0;
-  font-family: var(--fixed-font-family);
+  /* font-family: var(--font-proxima-nova); */
   line-height: 1.6;
   color: var(--text-color);
   background-color: var(--background-color);
@@ -64,7 +69,7 @@ header {
 
 h1, h2, h3,
 h4, h5, h6 {
-  font-family: var(--heading-font-family);
+  /* font-family: var(--heading-font-family); */
   font-weight: 600;
   line-height: 1.25;
   margin-top: 1em;
@@ -95,7 +100,7 @@ a:any-link {
 } */
 
 code, pre, samp {
-  font-family: var(--fixed-font-family);
+  /* font-family: var(--fixed-font-family); */
   font-size: var(--body-font-size-s);
 }
 
@@ -110,7 +115,7 @@ pre {
 /* buttons */
 
 a.button:any-link, button {
-  font-family: var(--body-font-family);
+  /* font-family: var(--body-font-family); */
   display: inline-block;
   box-sizing: border-box;
   text-decoration: none;
